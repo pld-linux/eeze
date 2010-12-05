@@ -3,75 +3,88 @@
 %bcond_without	static_libs	# don't build static library
 #
 %define		ecore_ver	1.0.0
-%define		svn		%{nil}
 
 Summary:	Library for manipulating devices through udev
 Summary(pl.UTF-8):	Biblioteka do operowania urządzeniami korzystająca z udev
 Name:		eeze
-%define	subver	beta2
+%define	subver	beta3
 Version:	1.0.0
 Release:	0.%{subver}.1
-License:	LGPL v2.1
+License:	BSD
 Group:		X11/Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.%{subver}.tar.bz2
-# Source0-md5:	dc7b009216d351ed282664f8ee47631d
-URL:		http://enlightenment.org/p.php?p=about/libs/efreet
+# Source0-md5:	e24260aed69402c966e84d231935b261
+URL:		http://trac.enlightenment.org/e/wiki/Eeze
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
-# ecore-file; ecore-desktop for tests
 BuildRequires:	ecore-devel >= %{ecore_ver}
 BuildRequires:	libtool
-BuildRequires:	udev-devel
-BuildRequires:	pkgconfig
-BuildRequires:	sed >= 4.0
-Requires:	ecore-file >= %{ecore_ver}
+BuildRequires:	udev-devel >= 148
+BuildRequires:	pkgconfig >= 1:0.22
+Requires:	ecore >= %{ecore_ver}
+Requires:	udev-libs >= 148
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Eeze is a library for manipulating devices through udev with a simple and fast
-api. It interfaces directly with libudev, avoiding such middleman daemons as
-udisks/upower or hal, to immediately gather device information the instant it
-becomes known to the system.  This can be used to determine such things as:
-  * If a cdrom has a disk inserted
-  * The temperature of a cpu core
-  * The remaining power left in a battery
-  * The current power consumption of various parts
-  * Monitor in realtime the status of peripheral devices
+Eeze is a library for manipulating devices through udev with a simple
+and fast API. It interfaces directly with libudev, avoiding such
+middleman daemons as udisks/upower or hal, to immediately gather device
+information the instant it becomes known to the system. This can be
+used to determine such things as:
+ - If a CD-ROM has a disk inserted
+ - The temperature of a cpu core
+ - The remaining power left in a battery
+ - The current power consumption of various parts
+ - Monitor in realtime the status of peripheral devices.
   
 Each of the above examples can be performed by using only a single eeze
 function, as one of the primary focuses of the library is to reduce the
 complexity of managing devices.
+
+%description -l pl.UTF-8
+Eeze to bibliotek do operowania urządzeniami poprzez udev z prostym i
+szybkim API. Działa bezpośrednio z libudev, bez pośrednich demonów,
+takich jak udisks, upower czy hal, aby zebrać informacje z urządzeń
+natychmiast, kiedy staną się znane w systemie. Może to służyć do
+określania rzeczy takich jak:
+ - włożenie płyty CD
+ - termperatura rdzenia procesora
+ - pozostała pojemność baterii
+ - aktualne zużycie energii przez różne elementy
+ - monitorowanie stanu urządzeń peryferyjnych w czasie rzeczywistym.
+
+Każde z tych zapytań może być wykonane przy użyciu jedynie pojedynczej
+funkcji eeze, jako że jedną z głównych idei biblioteki jest
+ograniczenie skomplikowania zarządzania urządzeniami.
 
 %package devel
 Summary:	Eeze header files
 Summary(pl.UTF-8):	Pliki nagłówkowe Eeze
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-# ecore-file
-BuildRequires:	ecore-devel >= %{ecore_ver}
+Requires:	ecore-devel >= %{ecore_ver}
+Requires:	udev-devel >= 148
 
 %description devel
-Header files for Efreet.
+Header files for Eeze.
 
 %description devel -l pl.UTF-8
-Pliki nagłówkowe Efreet.
+Pliki nagłówkowe Eeze.
 
 %package static
-Summary:	Static Efreet library
-Summary(pl.UTF-8):	Statyczna biblioteka Efreet
+Summary:	Static Eeze library
+Summary(pl.UTF-8):	Statyczna biblioteka Eeze
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
-Static Efreet library.
+Static Eeze library.
 
 %description static -l pl.UTF-8
-Statyczna biblioteka Efreet.
+Statyczna biblioteka Eeze.
 
 %prep
 %setup -q -n %{name}-%{version}.%{subver}
-
-sed -i -e 's/-g -O0//' src/lib/Makefile.am
 
 %build
 %{__libtoolize}
@@ -80,8 +93,9 @@ sed -i -e 's/-g -O0//' src/lib/Makefile.am
 %{__autoheader}
 %{__automake}
 %configure \
+	--disable-silent-rules \
 	%{!?with_static_libs:--disable-static}
-%{__make} V=1
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -89,9 +103,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-# just tests
-rm -f $RPM_BUILD_ROOT%{_bindir}/efreet_{alloc,menu_alloc,test,spec_test,cache_test}
-rm -rf $RPM_BUILD_ROOT%{_datadir}/%{name}/test
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/eeze_udev_test
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -101,16 +113,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING README
-%attr(755,root,root) %{_libdir}/libeeze%{svn}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libeeze%{svn}.so.1
+%doc AUTHORS COPYING README TODO
+%attr(755,root,root) %{_libdir}/libeeze.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libeeze.so.1
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libeeze.so
 %{_libdir}/libeeze.la
-%dir %{_includedir}/eeze-1
-%{_includedir}/eeze-1/*.h
+%{_includedir}/eeze-1
 %{_pkgconfigdir}/eeze.pc
 
 %if %{with static_libs}
