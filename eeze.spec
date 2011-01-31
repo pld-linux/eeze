@@ -7,13 +7,12 @@
 Summary:	Library for manipulating devices through udev
 Summary(pl.UTF-8):	Biblioteka do operowania urządzeniami korzystająca z udev
 Name:		eeze
-%define	subver	beta3
 Version:	1.0.0
 Release:	0.%{subver}.1
 License:	BSD
 Group:		X11/Libraries
-Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.%{subver}.tar.bz2
-# Source0-md5:	e24260aed69402c966e84d231935b261
+Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
+# Source0-md5:	49123331a173f687e67a3a9c6a2115f2
 URL:		http://trac.enlightenment.org/e/wiki/Eeze
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
@@ -84,7 +83,7 @@ Static Eeze library.
 Statyczna biblioteka Eeze.
 
 %prep
-%setup -q -n %{name}-%{version}.%{subver}
+%setup -q
 
 %build
 %{__libtoolize}
