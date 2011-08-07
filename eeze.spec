@@ -7,12 +7,12 @@
 Summary:	Library for manipulating devices through udev
 Summary(pl.UTF-8):	Biblioteka do operowania urządzeniami korzystająca z udev
 Name:		eeze
-Version:	1.0.1
+Version:	1.0.2
 Release:	1
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	f4151d503548b1741eea1254aff1ea51
+# Source0-md5:	51f9e7dca05a2e4c00ff75eeb70850a7
 URL:		http://trac.enlightenment.org/e/wiki/Eeze
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
@@ -27,18 +27,18 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Eeze is a library for manipulating devices through udev with a simple
 and fast API. It interfaces directly with libudev, avoiding such
-middleman daemons as udisks/upower or hal, to immediately gather device
-information the instant it becomes known to the system. This can be
-used to determine such things as:
+middleman daemons as udisks/upower or hal, to immediately gather
+device information the instant it becomes known to the system. This
+can be used to determine such things as:
  - If a CD-ROM has a disk inserted
  - The temperature of a cpu core
  - The remaining power left in a battery
  - The current power consumption of various parts
  - Monitor in realtime the status of peripheral devices.
   
-Each of the above examples can be performed by using only a single eeze
-function, as one of the primary focuses of the library is to reduce the
-complexity of managing devices.
+Each of the above examples can be performed by using only a single
+eeze function, as one of the primary focuses of the library is to
+reduce the complexity of managing devices.
 
 %description -l pl.UTF-8
 Eeze to bibliotek do operowania urządzeniami poprzez udev z prostym i
