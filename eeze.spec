@@ -2,25 +2,34 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
 #
-%define		ecore_ver	1.0.0
+%define		ecore_ver	1.1.0
+%define		eet_ver		1.5.0
+%define		eina_ver	1.1.0
 
 Summary:	Library for manipulating devices through udev
 Summary(pl.UTF-8):	Biblioteka do operowania urządzeniami korzystająca z udev
 Name:		eeze
-Version:	1.0.2
+Version:	1.1.0
 Release:	1
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	51f9e7dca05a2e4c00ff75eeb70850a7
+# Source0-md5:	04bd5202e12b57e0dddbcca2acc52df9
 URL:		http://trac.enlightenment.org/e/wiki/Eeze
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
+BuildRequires:	ecore-con-devel >= %{ecore_ver}
 BuildRequires:	ecore-devel >= %{ecore_ver}
+BuildRequires:	ecore-file-devel >= %{ecore_ver}
+BuildRequires:	eet-devel >= %{eet_ver}
+BuildRequires:	eina-devel >= %{eina_ver}
+BuildRequires:	libmount-devel >= 2.18.0
 BuildRequires:	libtool
 BuildRequires:	udev-devel >= 148
 BuildRequires:	pkgconfig >= 1:0.22
 Requires:	ecore >= %{ecore_ver}
+Requires:	eet >= %{eet_ver}
+Requires:	eina >= %{eina_ver}
 Requires:	udev-libs >= 148
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -62,6 +71,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe Eeze
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ecore-devel >= %{ecore_ver}
+Requires:	eina-devel >= %{eina_ver}
 Requires:	udev-devel >= 148
 
 %description devel
@@ -102,8 +112,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} $RPM_BUILD_ROOT%{_bindir}/eeze_udev_test
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -112,9 +120,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog README TODO
+%doc AUTHORS COPYING ChangeLog NEWS README TODO
+%attr(755,root,root) %{_bindir}/eeze_disk_ls
+%attr(755,root,root) %{_bindir}/eeze_mount
+%attr(755,root,root) %{_bindir}/eeze_umount
 %attr(755,root,root) %{_libdir}/libeeze.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libeeze.so.1
+# some enlightenment package?
+#%attr(755,root,root) %{_libdir}/enlightenment/utils/eeze_scanner
 
 %files devel
 %defattr(644,root,root,755)
