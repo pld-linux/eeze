@@ -10,7 +10,7 @@ Summary:	Library for manipulating devices through udev
 Summary(pl.UTF-8):	Biblioteka do operowania urządzeniami korzystająca z udev
 Name:		eeze
 Version:	1.1.0
-Release:	1
+Release:	2
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
@@ -103,7 +103,10 @@ Statyczna biblioteka Eeze.
 %{__automake}
 %configure \
 	--disable-silent-rules \
-	%{!?with_static_libs:--disable-static}
+	%{!?with_static_libs:--disable-static} \
+	--with-eject=/usr/bin/eject \
+	--with-mount=/bin/mount \
+	--with-umount=/bin/umount
 %{__make}
 
 %install
@@ -126,8 +129,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/eeze_umount
 %attr(755,root,root) %{_libdir}/libeeze.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libeeze.so.1
-# some enlightenment package?
-#%attr(755,root,root) %{_libdir}/enlightenment/utils/eeze_scanner
+%attr(755,root,root) %{_libdir}/enlightenment/utils/eeze_scanner
 
 %files devel
 %defattr(644,root,root,755)
