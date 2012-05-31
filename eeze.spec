@@ -2,19 +2,19 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
 #
-%define		ecore_ver	1.1.0
-%define		eet_ver		1.5.0
-%define		eina_ver	1.1.0
+%define		ecore_ver	1.2.0
+%define		eet_ver		1.6.0
+%define		eina_ver	1.2.0
 
 Summary:	Library for manipulating devices through udev
 Summary(pl.UTF-8):	Biblioteka do operowania urządzeniami korzystająca z udev
 Name:		eeze
-Version:	1.1.0
-Release:	3
+Version:	1.2.0
+Release:	1
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	04bd5202e12b57e0dddbcca2acc52df9
+# Source0-md5:	1483b8a0868a1537eb75a3f24875bbad
 URL:		http://trac.enlightenment.org/e/wiki/Eeze
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
@@ -25,12 +25,12 @@ BuildRequires:	eet-devel >= %{eet_ver}
 BuildRequires:	eina-devel >= %{eina_ver}
 BuildRequires:	libmount-devel >= 2.18.0
 BuildRequires:	libtool
-BuildRequires:	udev-devel >= 148
+BuildRequires:	udev-devel >= 1:148
 BuildRequires:	pkgconfig >= 1:0.22
 Requires:	ecore >= %{ecore_ver}
 Requires:	eet >= %{eet_ver}
 Requires:	eina >= %{eina_ver}
-Requires:	udev-libs >= 148
+Requires:	udev-libs >= 1:148
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -72,7 +72,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ecore-devel >= %{ecore_ver}
 Requires:	eina-devel >= %{eina_ver}
-Requires:	udev-devel >= 148
+Requires:	udev-devel >= 1:148
 
 %description devel
 Header files for Eeze.
