@@ -2,19 +2,19 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
 #
-%define		ecore_ver	1.2.0
-%define		eet_ver		1.6.0
-%define		eina_ver	1.2.0
+%define		ecore_ver	1.7.0
+%define		eet_ver		1.7.0
+%define		eina_ver	1.7.0
 
 Summary:	Library for manipulating devices through udev
 Summary(pl.UTF-8):	Biblioteka do operowania urządzeniami korzystająca z udev
 Name:		eeze
-Version:	1.2.0
-Release:	2
+Version:	1.7.0
+Release:	1
 License:	BSD
-Group:		X11/Libraries
+Group:		Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	1483b8a0868a1537eb75a3f24875bbad
+# Source0-md5:	fd8b66abd9deb039956304a857b4e2aa
 URL:		http://trac.enlightenment.org/e/wiki/Eeze
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
@@ -31,6 +31,7 @@ Requires:	ecore >= %{ecore_ver}
 Requires:	eet >= %{eet_ver}
 Requires:	eina >= %{eina_ver}
 Requires:	udev-libs >= 1:148
+Obsoletes:	enlightenment-utils-eeze
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -92,15 +93,6 @@ Static Eeze library.
 %description static -l pl.UTF-8
 Statyczna biblioteka Eeze.
 
-%package -n enlightenment-utils-eeze
-Summary:	Eeze library utils for enlightenment
-#Summary(pl.UTF-8):	
-Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
-
-%description -n enlightenment-utils-eeze
-Eeze library utils for enlightenment.
-
 %prep
 %setup -q
 
@@ -135,6 +127,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/eeze_disk_ls
 %attr(755,root,root) %{_bindir}/eeze_mount
+%attr(755,root,root) %{_bindir}/eeze_scanner
 %attr(755,root,root) %{_bindir}/eeze_umount
 %attr(755,root,root) %{_libdir}/libeeze.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libeeze.so.1
@@ -151,7 +144,3 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libeeze.a
 %endif
-
-%files -n enlightenment-utils-eeze
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/enlightenment/utils/eeze_scanner
