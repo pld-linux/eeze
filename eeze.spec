@@ -9,12 +9,12 @@
 Summary:	Library for manipulating devices through udev
 Summary(pl.UTF-8):	Biblioteka do operowania urządzeniami korzystająca z udev
 Name:		eeze
-Version:	1.7.1
+Version:	1.7.2
 Release:	1
 License:	BSD
 Group:		Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	0e9d008a9ae17de2aea82a34ee62691e
+# Source0-md5:	fbfb334a767a0a0e928162834a913897
 URL:		http://trac.enlightenment.org/e/wiki/Eeze
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
