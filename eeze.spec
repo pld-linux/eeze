@@ -1,3 +1,4 @@
+# NOTE: for versions >= 1.8 see efl.spec
 #
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
