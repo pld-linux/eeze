@@ -3,19 +3,19 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
 #
-%define		ecore_ver	1.7.9
-%define		eet_ver		1.7.9
-%define		eina_ver	1.7.9
+%define		ecore_ver	1.7.10
+%define		eet_ver		1.7.10
+%define		eina_ver	1.7.10
 
 Summary:	Library for manipulating devices through udev
 Summary(pl.UTF-8):	Biblioteka do operowania urządzeniami korzystająca z udev
 Name:		eeze
-Version:	1.7.9
+Version:	1.7.10
 Release:	1
 License:	BSD
 Group:		Libraries
 Source0:	http://download.enlightenment.org/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	94743f4f50682b58e2761bfb5978a48a
+# Source0-md5:	dfe17a0870e1430f7459d45e514fbbdd
 URL:		http://trac.enlightenment.org/e/wiki/Eeze
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
