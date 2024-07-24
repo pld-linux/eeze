@@ -33,7 +33,7 @@ Requires:	eet >= %{eet_ver}
 Requires:	eina >= %{eina_ver}
 Requires:	libmount >= 2.18.0
 Requires:	udev-libs >= 1:148
-Obsoletes:	enlightenment-utils-eeze
+Obsoletes:	enlightenment-utils-eeze < 1.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
